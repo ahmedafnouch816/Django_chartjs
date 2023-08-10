@@ -1,0 +1,35 @@
+ID,Industry,Image
+1,A&D,Binary Data
+2,Agriculture,Binary Data
+3,Automotive,Binary Data
+4,Beverage,Binary Data
+5,Bio Tech,Binary Data
+6,Chemical,Binary Data
+7,CPG,Binary Data
+8,Distribution,Binary Data
+9,Energy,Binary Data
+10,Federal-Civilian,Binary Data
+11,Federal-DOD,Binary Data
+12,Financial,Binary Data
+13,High Tech,Binary Data
+14,Hotel,Binary Data
+15,Industrial,Binary Data
+16,Insurance,Binary Data
+17,Materials,Binary Data
+18,Media,Binary Data
+19,Medical Devices,Binary Data
+20,Metals,Binary Data
+21,Mining,Binary Data
+22,Non-Profit,Binary Data
+23,Oil & Gas,Binary Data
+24,Packaging,Binary Data
+25,Paper,Binary Data
+26,Pharma,Binary Data
+27,Recycling,Binary Data
+28,Retail,Binary Data
+29,Semiconductor,Binary Data
+30,Services,Binary Data
+32,Telecom,Binary Data
+33,Textile,Binary Data
+34,Transportation,Binary Data
+35,Utilities,Binary Data

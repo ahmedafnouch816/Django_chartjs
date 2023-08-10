@@ -1,0 +1,539 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Big Analytics</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      body {
+    font-size: .875rem;
+  }
+  
+  .feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+  }
+  
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  
+  /*
+   * Content
+   */
+  
+  [role="main"] {
+    padding-top: 133px; /* Space for fixed navbar */
+  }
+  
+  @media (min-width: 768px) {
+    [role="main"] {
+      padding-top: 48px; /* Space for fixed navbar */
+    }
+  }
+  
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+  
+  .navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+  }
+  
+  .form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+  }
+  
+  .form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  }
+
+.table-responsive .row{
+  display:contents;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}  
+
+
+.titles{
+  text-align: center;
+  padding-bottom: 4vh;
+}
+    </style>
+  </head>
+  <body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Big Analytics</a>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="{% url 'index' %}">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'rh'%}">
+              <span data-feather="home"></span>
+              Ressource Humain  <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'customr'%}">
+              <span data-feather="users"></span>
+              Customers
+            </a>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="{% url 'procurement'%}">
+              <span data-feather="shopping-cart"></span>
+              Procurement
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link"  href="{% url 'opportunity'%}">
+              <span data-feather="shopping-cart"></span>
+              Opportunity
+            </a>
+          </li>
+
+
+   
+
+
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="titles" >HR_Dashboard</h1>
+      </div>
+
+     
+
+     <!-- Highcharts display -->
+     <table style="width: 100%;">
+      <tr>
+        <td><div id="container" style="min-width: 100px; height: 400px; margin: 0 auto"></div></td>
+        <!--<td><div id="piechart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div></td>-->
+      </tr>
+     </table>
+     <br><br>
+     <table style="width: 100%;">
+     <tr>
+      <td><div id="cont_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div></td>
+      <td><div id="chart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div></td>
+    </tr>
+   </table>
+   <br><br><br>
+
+   <table style="width: 100%;">
+    <tr>
+      <td><div id="chartss" style="min-width: 280px; height: 400px; max-width: 600px; margin: 0 auto"></div></td>
+      <td><div id="cc" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div></td>
+    </tr>
+  </table>
+
+
+
+
+     
+    <h2 class="pt-4">Un Table qui content les donnees avec une option de filter </h2>
+	  <p class="text-danger"></p>
+	  <div class="table-responsive" id="ts">
+	    {{table_data|safe}}
+	  </div>
+
+
+    </main>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".nav-link").on("click", function() {
+      // Supprimer la classe "active" de tous les éléments de navigation
+      $(".nav-link").removeClass("active");
+  
+      // Ajouter la classe "active" à l'élément de navigation cliqué
+      $(this).addClass("active");
+    });
+  });
+</script>
+
+
+
+  <!-- Chartjs libraries -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+<!----------------------------------  New Hire Count,Active Employee Count' --------------------------------------------------->
+    <script>
+      _categories = {{categories|safe}};
+      _values = {{values|safe}};
+      
+      Highcharts.chart('container', {
+	  chart: {
+              type: 'column'
+	  },
+	  title: {
+              text: 'New Hire Count,Active Employee Count'
+	  },
+	  xAxis: {
+              categories:_categories,
+              crosshair: true
+	  },
+	  yAxis: {
+              min: 0,
+              title: {
+		  text: 'BU'
+              }
+	  },
+	  tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+		  '<td style="padding:0"><b>{point.y}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+	  },
+	  plotOptions: {
+              column: {
+		  pointPadding: 0.2,
+		  borderWidth: 0
+        }
+	  },
+	  series: [{
+              name: 'Employee',
+              data: _values
+	      
+	  }]
+      });
+      </script>
+
+      
+
+<!---******************************************* NEW Hire Count Same Peroid Last Year  ********* -->
+
+<script>
+  _categories_ = {{months_months|safe}};
+  _values_ = {{values_months|safe}};
+  
+  Highcharts.chart('chartss', {
+chart: {
+          type: 'line'
+},
+title: {
+          text: 'NEW Hire Count Same Peroid Last Year'
+},
+xAxis: {
+          categories:_categories_,
+          crosshair: true
+},
+yAxis: {
+          min: 0,
+          title: {
+  text: 'Qte'
+          }
+},
+tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+  '<td style="padding:0"><b>{point.y}Qte</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+},
+plotOptions: {
+          column: {
+  pointPadding: 0.2,
+  borderWidth: 0
+    }
+},
+series: [{
+          name: 'Month',
+          data: _values_
+    
+}]
+  });
+  </script>
+
+
+
+
+
+<!--********************************       New Hire Count BY GENDER *************************************-->
+
+<script>
+  _categories = {{ gender_gd|safe }};
+  _values = {{ values_gender|safe }};
+
+  // Create the chart
+  Highcharts.chart('cont_pie', {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'New Hire Count By Gender'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    },
+    series: [{
+      name: 'Gender',
+      colorByPoint: true,
+      data: (function() {
+        var data = [];
+        for (var i = 0; i < _categories.length; i++) {
+          data.push({
+            name: _categories[i],
+            y: _values[i]
+          });
+        }
+        return data;
+      })()
+    }]
+  });
+</script>
+
+
+<!--************************************ Active Employee Count BY Age Group  ************************-->
+
+
+  <script>
+    categories_ = {{ categories_age|safe }};
+    values_ = {{ values_age|safe }};
+  
+    // Create the chart
+    Highcharts.chart('chart1', {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: 'Active Employee Count BY Age Group ',
+        align: 'left'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          }
+        }
+      },
+      series: [{
+        name: 'Group_Emp',
+        colorByPoint: true,
+        data: (function() {
+          var data = [];
+          for (var i = 0; i < categories_.length; i++) {
+            data.push({
+              name: categories_[i],
+              y: values_[i]
+            });
+          }
+          return data;
+        })()
+      }]
+    });
+  </script>
+  
+<!--************************************** New Hire Classy Age with EtnicGroup ****************************-->
+
+
+<script>
+  _categories_ = {{categories_emply|safe}};
+  _values_ = {{values_emply|safe}};
+  Highcharts.chart('cc', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'New Hire Classy Age with EtnicGroup'
+    },
+    subtitle: {
+      text: ''
+    },
+    xAxis: {
+      categories: _categories_,
+      crosshair: true
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Age'
+      }
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0
+      }
+    },
+    series: [{
+      name: 'EtnicGroup',
+      data: _values_
+  
+    }, 
+
+    
+    ]
+  });
+
+</script>
+
+<!--********************                                        ****************************-->
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    $('#big_tables').DataTable();
+} );
+</script>
+</html>
